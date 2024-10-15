@@ -4,9 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var bukusRouter = require('./routes/bukus');
+
+
+const mongoose = require("mongoose");
 
 
 //CORS Enabled
@@ -21,6 +25,26 @@ app.use((req,res,next)=>{
     "Origin, X-Requested-With,Content-Type, Accept");
   res.setHeader("Access-Control-Allow-Methods","GET, POST, PATCH, DELETE, OPTIONS");  
   next();
+});
+
+
+// mongoose.connect(
+//   "mongodb+srv://mdp:peSlThYtcsmwgvV8@cluster0.n214x.mongodb.net/dbbuku?retryWrites=true&w=majority&appName=Cluster0"
+// ).then(()=>{
+//   console.log("Connected to Database");
+// }).catch((err)=>{
+//   console.error('App starting error:', err.stack);
+//   console.log("Connection Failed");
+// });
+
+
+mongoose.connect(
+  "mongodb://localhost:27017/dbbuku"
+).then(()=>{
+  console.log("Connected to Database");
+}).catch((err)=>{
+  // console.error('App starting error:', err.stack);
+  console.log("Connection Failed");
 });
 
 
