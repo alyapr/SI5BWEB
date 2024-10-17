@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const Buku = require("../model/buku");
+const BukuController = require("../controller/buku");
+const { route } = require('./bukus');
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
 //   res.send('respond dari BUKU router');
@@ -9,25 +10,16 @@ const Buku = require("../model/buku");
 
 
 //format JSON
-router.post('/', (req, res) => {
-    const buku = new Buku({
-        judul : req.body.judul,
-        penulis : req.body.penulis,
-        genre : req.body.genre
-    });
-    console.log(buku);
-    res.status(201).json({
-        message : "Data berhasil disimpan"
-    });
-});
+//insert
+router.post('/',BukuController.createBuku);
 
-router.post('path', (req, res) => {
-    res.status(201).json({
-        message : "Data berhasil disimpan"
-    });
-});
+//select
+router.get('/',BukuController.readBuku);
 
+//delete
+router.delete('/',BukuController.deleteBuku);
 
-
+//update
+router.put('/',BukuController.updateBuku);
 
 module.exports = router;
